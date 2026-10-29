@@ -1,0 +1,8 @@
+import{n as e}from"./xml-CG84ne-o.js";function t(e,t,n){let r=new TextDecoder(`utf-8`,{fatal:!1}).decode(t).replace(/\u0000/g,``).trim(),s=a(r)||o(e),c=i(r,s);return{title:s,kind:n,text:c.map(e=>e.text).join(`
+
+`)||r,parts:c}}function n(e,t){let n=new TextDecoder(`utf-8`,{fatal:!1}).decode(t),r=n.match(/<title[^>]*>([\s\S]*?)<\/title>/i),i=r?s(r[1]).trim():o(e),a=n.replace(/<script[\s\S]*?<\/script>/gi,``).replace(/<style[\s\S]*?<\/style>/gi,``).replace(/<head[\s\S]*?<\/head>/gi,``),c=[...a.matchAll(/<(h[1-3]|p|li|td|th)[^>]*>([\s\S]*?)<\/\1>/gi)].map((e,t)=>({label:/^h/i.test(e[1])&&s(e[2].replace(/<[^>]+>/g,``)).trim()||`Section ${t+1}`,text:s(e[2].replace(/<[^>]+>/g,` `)).replace(/\s+/g,` `).trim()})).filter(e=>e.text),l=c.map(e=>e.text).join(`
+
+`)||s(a.replace(/<[^>]+>/g,` `)).replace(/\s+/g,` `).trim();return{title:i||o(e),kind:`html`,text:l,parts:c.length?c:[{label:`Document`,text:l}]}}function r(e,t){let n=new TextDecoder(`utf-8`,{fatal:!1}).decode(t).trim(),r=a(n)||o(e);return{title:r,kind:`md`,text:n,parts:i(n,r)}}function i(e,t){let n=e.split(/\n(?=#{1,6}\s+)/);return n.length<=1?[{label:t||`Note`,text:e}]:n.map(e=>{let n=e.trim().split(`
+`),r=n[0].replace(/^#{1,6}\s+/,``).trim()||t;return{label:r,text:n.slice(1).join(`
+`).trim()||r}}).filter(e=>e.text)}function a(e){return(e.split(`
+`).map(e=>e.trim()).find(Boolean)??``).replace(/^#{1,6}\s+/,``).slice(0,120)}function o(e){return e.replace(/^.*[/\\]/,``).replace(/\.[^.]+$/,``)||`Note`}function s(t){return e(t).replace(/&nbsp;/g,` `)}export{n as parseHtml,r as parseMarkdown,t as parsePlain};

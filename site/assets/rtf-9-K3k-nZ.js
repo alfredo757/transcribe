@@ -1,0 +1,5 @@
+function e(e){let t=0,n=``;for(let r=0;r<e.length;r+=1){let i=e[r];if(i===`{`){if(t>0){t+=1;continue}let n=e.slice(r,r+48);(/^\{\\\*/.test(n)||/^\{\\(?:fonttbl|colortbl|stylesheet|info|pict|object|datastore|themedata|listtable|listoverridetable|rsidtbl)\b/.test(n))&&(t=1)}else if(i===`}`)t>0&&--t;else if(!(t>0)){if(i===`\\`){if(e[r+1]===`\\`||e[r+1]===`{`||e[r+1]===`}`){n+=e[r+1],r+=1;continue}if(e[r+1]===`'`){let t=e.slice(r+2,r+4);if(/^[0-9a-fA-F]{2}$/.test(t)){n+=String.fromCharCode(parseInt(t,16)),r+=3;continue}}let t=e.slice(r+1).match(/^([a-zA-Z]+)(-?\d+)? ?/);if(t){let i=t[1];if(i===`par`||i===`line`)n+=`
+`;else if(i===`tab`)n+=`	`;else if(i===`u`&&t[2]){let i=Number(t[2]);i<0&&(i+=65536),n+=String.fromCharCode(i);let a=r+1+t[0].length;e[a]&&e[a]!==`\\`&&e[a]!==`{`&&e[a]!==`}`?r=a:r+=t[0].length;continue}r+=t[0].length-1;continue}}else i!==`\r`&&(n+=i)}}return n.replace(/[ \t]+\n/g,`
+`).replace(/\n{3,}/g,`
+
+`).trim()}export{e as rtfToText};
