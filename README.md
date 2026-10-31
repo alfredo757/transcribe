@@ -1,6 +1,6 @@
 # Transcribe
 
-Transcribe 1.6.0 is a progressive web app that records, transcribes, and answers questions about notes on this device.
+Transcribe 1.6.1 is a progressive web app that records, transcribes, and answers questions about notes on this device.
 
 https://alfredo757.github.io/transcribe/
 

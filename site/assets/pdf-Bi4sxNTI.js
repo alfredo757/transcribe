@@ -1,0 +1,9 @@
+import{a as e}from"./index-DTwmvp_i.js";var t=new URL(`pdf.worker.min-iDqQPrd3.mjs`,import.meta.url).href,n=s(`DCTDecode`),r=s(`stream`),i=s(`endstream`),a=new Uint8Array([255,216]);function o(e){let t=[],o=0;for(;o<e.length;){let s=c(e,n,o);if(s<0)break;let l=c(e,r,s);if(l<0||l-s>1200){o=s+n.length;continue}let u=l+r.length;e[u]===13&&(u+=1),e[u]===10&&(u+=1);let d=c(e,i,u);if(d<0)break;let f=d;e[f-1]===10&&--f,e[f-1]===13&&--f;let p=e.subarray(u,f),m=c(p,a,0);m>=0&&p.length-m>32&&t.push(p.slice(m)),o=d+i.length}return t}function s(e){return new TextEncoder().encode(e)}function c(e,t,n){outer:for(let r=n;r<=e.length-t.length;r+=1){for(let n=0;n<t.length;n+=1)if(e[r+n]!==t[n])continue outer;return r}return-1}function l(){let e=Promise;typeof e.try!=`function`&&(e.try=(e,...t)=>new Promise(n=>n(e(...t))))}function u(){return t}async function d(){let t=await e(()=>import(`./pdf-Cut-V1Ez.js`),[],import.meta.url);return t.GlobalWorkerOptions.workerSrc=u(),t}async function f(e,t){l();let n=new Uint8Array(e),r=await(await d()).getDocument({data:n.slice(),useSystemFonts:!0}).promise,i=[];try{for(let e=1;e<=r.numPages;e+=1){let t=await(await r.getPage(e)).getTextContent(),n=[];for(let e of t.items)`str`in e&&(n.push(e.str),`hasEOL`in e&&e.hasEOL?n.push(`
+`):n.push(` `));let a=n.join(``).replace(/[ \t]+\n/g,`
+`).replace(/\n{3,}/g,`
+
+`).trim();i.push({label:`Page ${e}`,text:a})}}finally{await r.destroy()}if(i.map(e=>e.text).join(`
+`).trim().replace(/\s/g,``).length<24){let e=o(n);for(let n=0;n<e.length;n+=1){let r=e[n],a=new ArrayBuffer(r.byteLength);new Uint8Array(a).set(r);let o=new Blob([a],{type:`image/jpeg`});try{let e=(await t(o)).trim();e&&i.push({label:`Page image ${n+1}`,text:e})}catch{}}}let a=i.map(e=>e.text).filter(Boolean).join(`
+
+`).trim();return{title:a.split(`
+`).map(e=>e.trim()).find(Boolean)?.slice(0,120)||`PDF`,kind:`pdf`,text:a,parts:i.filter(e=>e.text.trim())}}export{f as parsePdf};

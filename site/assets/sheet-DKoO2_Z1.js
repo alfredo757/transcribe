@@ -1,3 +1,0 @@
-import{a as e,t}from"./index-DT9pAS2q.js";async function n(n,r){let i=await e(()=>import(`./xlsx-Sx6neS5-.js`),[],import.meta.url),a=i.read(n,{type:`array`}),o=a.SheetNames.map(e=>{let n=a.Sheets[e],r=i.utils.sheet_to_json(n,{header:1,raw:!1,defval:``}).map(e=>Array.isArray(e)?e.map(e=>String(e??``)):[]);return{label:`Sheet: ${e}`,text:t(r)||`(empty sheet)`}}),s=o.map(e=>`${e.label}\n${e.text}`).join(`
-
-`);return{title:a.SheetNames[0]?`${a.SheetNames[0]}`:`Spreadsheet`,kind:r,text:s,parts:o}}export{n as parseSheet};

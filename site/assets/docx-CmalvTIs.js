@@ -1,0 +1,6 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./lib-dEvXDbWC.js","./rolldown-runtime-BCiCTKAo.js","./index-DTwmvp_i.js","./index-gpVbg-Z4.css"])))=>i.map(i=>d[i]);
+import{o as e}from"./rolldown-runtime-BCiCTKAo.js";import{a as t}from"./index-DTwmvp_i.js";async function n(n){let a=await t(()=>import(`./lib-dEvXDbWC.js`).then(t=>e(t.default,1)),__vite__mapDeps([0,1,2,3]),import.meta.url),o=r(n),s=[...((await a.convertToHtml(o)).value||``).matchAll(/<(h[1-3]|p|li)[^>]*>([\s\S]*?)<\/\1>/gi)].map((e,t)=>{let n=i(e[2].replace(/<[^>]+>/g,` `)).replace(/\s+/g,` `).trim();return{label:/^h/i.test(e[1])?n.slice(0,80)||`Section ${t+1}`:`Paragraph ${t+1}`,text:n}}).filter(e=>e.text),c=((await a.extractRawText(o)).value||s.map(e=>e.text).join(`
+
+`)).trim();return{title:s[0]?.text.split(`
+`)[0]?.slice(0,120)||c.split(`
+`).find(Boolean)?.slice(0,120)||`Document`,kind:`docx`,text:c,parts:s.length?s:[{label:`Document`,text:c}]}}function r(e){let t={arrayBuffer:e},n=globalThis.Buffer;return n&&(t.buffer=n.from(new Uint8Array(e))),t}function i(e){return e.replace(/&nbsp;/g,` `).replace(/&amp;/g,`&`).replace(/&lt;/g,`<`).replace(/&gt;/g,`>`).replace(/&quot;/g,`"`)}export{n as parseDocx};
